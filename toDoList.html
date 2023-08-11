@@ -156,6 +156,7 @@
         </table>
     </div>
     <script>
+        // insert the value and then update the list.
         function getAndUpdate(){
             tit = document.getElementById("title").value;
             desc = document.getElementById("description").value;
@@ -173,7 +174,7 @@
         }
         update();
     }
-    
+    // Function to Update the List.
     function update(){
         if(localStorage.getItem('itemJson')==null){
             itemJsonArray = [];
@@ -203,6 +204,7 @@
     add.addEventListener("click" , getAndUpdate);
     update();
 
+    //To delete the list Item.
     function deletes(itemIndex){
         console.log("Delete ",itemIndex);
         itemJsonStr = localStorage.getItem("itemJson");
@@ -211,6 +213,8 @@
         localStorage.setItem('itemJson',JSON.stringify(itemJsonArray));
         update();
     }
+
+    //To clear all the list at one's.
     function cleared(){
         console.log("Cleared successfully!!");
         localStorage.clear();
