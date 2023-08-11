@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(37, 20, 20);
+            color: beige;
+        }
+
+        #navbar {
+            background-color: rgb(196, 178, 177);
+            color: beige;
+            padding: 5px;
+        }
+
+        #navbar a {
+            font-size: 2.5em;
+            background-color: rgb(196, 178, 177);
+            color: white;
+            text-decoration: none;
+        }
+
+        #item {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            margin: 9px 8px;
+            font-size: 1.7em;
+            background-color: rgb(196, 178, 177);
+        }
+
+        .items {
+            background-color: rgb(196, 178, 177);
+            list-style: none;
+        }
+
+        .container {
+            width: 80%;
+            border: 2px solid rgb(240, 223, 223);
+            margin: 10px auto;
+            border-radius: 9px;
+
+        }
+
+        .heading {
+            text-align: center;
+            margin: 4px;
+            font-size: 2.5em;
+        }
+
+        .container-1 {
+            width: 95%;
+            font-size: 1.5rem;
+            margin: 5px auto;
+            padding: 5px 24px;
+            border-radius: 9px;
+        }
+
+        #title {
+            background-color: beige;
+            width: 95%;
+            border-radius: 4px;
+            color: black;
+            font-size: 1.2rem;
+            padding: 12px 10px
+        }
+
+        #description {
+            font-size: 1.5rem;
+            border-radius: 9px;
+            padding: 10px;
+            background-color: beige;
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            padding: 8px;
+        }
+
+        th {
+            font-size: 2rem;
+        }  
+        
+        td {
+            font-size: 1.6rem;
+        }
+
+        .btn {
+            background-color: rgb(6, 61, 112);
+            height: 3rem;
+            width: 10rem;
+            margin: 6px;
+            border-radius: 5px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .btn:hover {
+            background-color: rgba(7, 92, 189, 0.726);
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar" style="display: flex;">
+        <a href="#" class="logo">TODOs List</a>
+        <ul id="item">
+            <li class="items">Home</li>
+            <li class="items">About</li>
+            <li class="items">Service</li>
+            <li class="items">Contact Us</li>
+        </ul>
+    </nav>
+    <div class="container ">
+        <h2 class="heading">TODO List</h2>
+
+        <div class="container-1">
+            <label for="title" style="font-size: 1.5rem;">Title</label><br>
+            <input type="text" id="title">
+            <br>
+            <br>
+            <label for="title" style="font-size: 1.5rem;">Description</label><br>
+            <textarea name="Mytext" cols="108" rows="10" id="description" placeholder="Describe...."></textarea>
+            <button class="btn" id="add" >Add To List</button>
+            <button class="btn" onclick ="cleared()">Clear List</button>
+        </div>
+        <br>
+        <br>
+        <br>
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">Sno</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+            <tbody id="tableBody">
+             <tr>
+                <td>1</td>
+                <td>Gym</td>
+                <td>I Want to go to gym</td>
+                <td><button class="btn">Delete</button></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <script>
+        function getAndUpdate(){
+            tit = document.getElementById("title").value;
+            desc = document.getElementById("description").value;
+            if(localStorage.getItem('itemJson')==null){
+            console.log("Updating...");
+            itemJsonArray = [];
+            itemJsonArray.push([tit , desc]);
+            localStorage.setItem('itemJson' , JSON.stringify(itemJsonArray));
+        }
+        else{
+            itemJsonStr = localStorage.getItem('itemJson');
+            itemJsonArray = JSON.parse(itemJsonStr);
+            itemJsonArray.push([tit , desc]);
+            localStorage.setItem('itemJson' , JSON.stringify(itemJsonArray));
+        }
+        update();
+    }
+    
+    function update(){
+        if(localStorage.getItem('itemJson')==null){
+            itemJsonArray = [];
+            localStorage.setItem('itemJson',JSON.stringify(itemJsonArray));
+        }
+        else{
+            itemJsonStr= localStorage.getItem('itemJson');
+            itemJsonArray = JSON.parse(itemJsonStr);
+        }
+
+        // to populate table 
+        tableBody = document.getElementById("tableBody");
+        str = "";
+        itemJsonArray.forEach((element , index) => {
+            str += `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${element[0]}</td>
+                <td>${element[1]}</td>
+                <td><button class="btn" onclick = deletes(${index})>Delete</button></td>
+            </tr>
+            `
+        });
+        tableBody.innerHTML = str;
+    }
+    add = document.getElementById("add");
+    add.addEventListener("click" , getAndUpdate);
+    update();
+
+    function deletes(itemIndex){
+        console.log("Delete ",itemIndex);
+        itemJsonStr = localStorage.getItem("itemJson");
+        itemJsonArray = JSON.parse(itemJsonStr)
+        itemJsonArray.splice(itemIndex,1);
+        localStorage.setItem('itemJson',JSON.stringify(itemJsonArray));
+        update();
+    }
+    function cleared(){
+        console.log("Cleared successfully!!");
+        localStorage.clear();
+        update();
+    }
+
+    </script>
+</body>
+
+</html>
