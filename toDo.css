@@ -1,0 +1,102 @@
+     * {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(37, 20, 20);
+            color: beige;
+        }
+
+        #navbar {
+            background-color: rgb(196, 178, 177);
+            color: beige;
+            padding: 5px;
+        }
+
+        #navbar a {
+            font-size: 2.5em;
+            background-color: rgb(196, 178, 177);
+            color: white;
+            text-decoration: none;
+        }
+
+        #item {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            margin: 9px 8px;
+            font-size: 1.7em;
+            background-color: rgb(196, 178, 177);
+        }
+
+        .items {
+            background-color: rgb(196, 178, 177);
+            list-style: none;
+        }
+
+        .container {
+            width: 80%;
+            border: 2px solid rgb(240, 223, 223);
+            margin: 10px auto;
+            border-radius: 9px;
+
+        }
+
+        .heading {
+            text-align: center;
+            margin: 4px;
+            font-size: 2.5em;
+        }
+
+        .container-1 {
+            width: 95%;
+            font-size: 1.5rem;
+            margin: 5px auto;
+            padding: 5px 24px;
+            border-radius: 9px;
+        }
+
+        #title {
+            background-color: beige;
+            width: 95%;
+            border-radius: 4px;
+            color: black;
+            font-size: 1.2rem;
+            padding: 12px 10px
+        }
+
+        #description {
+            font-size: 1.5rem;
+            border-radius: 9px;
+            padding: 10px;
+            background-color: beige;
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            padding: 8px;
+        }
+
+        th {
+            font-size: 2rem;
+        }  
+        
+        td {
+            font-size: 1.6rem;
+        }
+
+        .btn {
+            background-color: rgb(6, 61, 112);
+            height: 3rem;
+            width: 10rem;
+            margin: 6px;
+            border-radius: 5px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .btn:hover {
+            background-color: rgba(7, 92, 189, 0.726);
+        }
+    
